@@ -1,4 +1,4 @@
-name: connectedvcs-tools
+name: connectedvcs-tools-test-test
 on:
   pull_request:
     types: [opened, synchronize, reopened]
@@ -27,19 +27,19 @@ jobs:
         - name: Install # This action is to install and build subfolders in project
           run: |
             cd $GITHUB_WORKSPACE
-            export LD_LIBRARY_PATH=/__w/connectedvcs-tools/connectedvcs-tools/fedgov-cv-lib-asn1c/lib
-            cd /__w/connectedvcs-tools/connectedvcs-tools/fedgov-cv-parent && mvn -e -X clean install -Dmaven.test.failure.ignore=true
-            cd /__w/connectedvcs-tools/connectedvcs-tools/fedgov-cv-lib-asn1c && mvn -e -X clean install -Dmaven.test.failure.ignore=true
-            cd /__w/connectedvcs-tools/connectedvcs-tools/fedgov-cv-asn1decoder && mvn -e -X clean install -Dmaven.test.failure.ignore=true
-            cd /__w/connectedvcs-tools/connectedvcs-tools/fedgov-cv-mapencoder && mvn -e -X clean install -Dmaven.test.failure.ignore=true
-            cd /__w/connectedvcs-tools/connectedvcs-tools/fedgov-cv-timencoder && mvn -e -X clean install -Dmaven.test.failure.ignore=true
-            cd /__w/connectedvcs-tools/connectedvcs-tools/fedgov-cv-rgaencoder && mvn -e -X clean install -Dmaven.test.failure.ignore=true
-            cd /__w/connectedvcs-tools/connectedvcs-tools/fedgov-cv-message-builder && mvn -e -X clean install -Dmaven.test.failure.ignore=true
-            cd /__w/connectedvcs-tools/connectedvcs-tools/fedgov-cv-ISDcreator-webapp && mvn -e -X clean install -Dmaven.test.failure.ignore=true
-            cd /__w/connectedvcs-tools/connectedvcs-tools/fedgov-cv-message-validator-webapp && mvn -e -X clean install -Dmaven.test.failure.ignore=true
-            cd /__w/connectedvcs-tools/connectedvcs-tools/fedgov-cv-TIMcreator-webapp && mvn -e -X clean install -Dmaven.test.failure.ignore=true
-            cd /__w/connectedvcs-tools/connectedvcs-tools/fedgov-cv-map-services-proxy && mvn -e -X clean install -Dmaven.test.failure.ignore=true
-            jar cvf /__w/connectedvcs-tools/connectedvcs-tools/root.war -C /__w/connectedvcs-tools/connectedvcs-tools/root .
+            export LD_LIBRARY_PATH=/__w/connectedvcs-tools-test-test/connectedvcs-tools-test-test/fedgov-cv-lib-asn1c/lib
+            cd /__w/connectedvcs-tools-test-test/connectedvcs-tools-test-test/fedgov-cv-parent && mvn -e -X clean install -Dmaven.test.failure.ignore=true
+            cd /__w/connectedvcs-tools-test-test/connectedvcs-tools-test-test/fedgov-cv-lib-asn1c && mvn -e -X clean install -Dmaven.test.failure.ignore=true
+            cd /__w/connectedvcs-tools-test-test/connectedvcs-tools-test-test/fedgov-cv-asn1decoder && mvn -e -X clean install -Dmaven.test.failure.ignore=true
+            cd /__w/connectedvcs-tools-test-test/connectedvcs-tools-test-test/fedgov-cv-mapencoder && mvn -e -X clean install -Dmaven.test.failure.ignore=true
+            cd /__w/connectedvcs-tools-test-test/connectedvcs-tools-test-test/fedgov-cv-timencoder && mvn -e -X clean install -Dmaven.test.failure.ignore=true
+            cd /__w/connectedvcs-tools-test-test/connectedvcs-tools-test-test/fedgov-cv-rgaencoder && mvn -e -X clean install -Dmaven.test.failure.ignore=true
+            cd /__w/connectedvcs-tools-test-test/connectedvcs-tools-test-test/fedgov-cv-message-builder && mvn -e -X clean install -Dmaven.test.failure.ignore=true
+            cd /__w/connectedvcs-tools-test-test/connectedvcs-tools-test/fedgov-cv-ISDcreator-webapp && mvn -e -X clean install -Dmaven.test.failure.ignore=true
+            cd /__w/connectedvcs-tools-test/connectedvcs-tools-test/fedgov-cv-message-validator-webapp && mvn -e -X clean install -Dmaven.test.failure.ignore=true
+            cd /__w/connectedvcs-tools-test/connectedvcs-tools-test/fedgov-cv-TIMcreator-webapp && mvn -e -X clean install -Dmaven.test.failure.ignore=true
+            cd /__w/connectedvcs-tools-test/connectedvcs-tools-test/fedgov-cv-map-services-proxy && mvn -e -X clean install -Dmaven.test.failure.ignore=true
+            jar cvf /__w/connectedvcs-tools-test/connectedvcs-tools-test/root.war -C /__w/connectedvcs-tools-test/connectedvcs-tools-test/root .
 
         - name: List Jacoco reports
           run: |
@@ -51,8 +51,8 @@ jobs:
           with:
             name: Class files
             path: |
-              /__w/connectedvcs-tools/connectedvcs-tools/fedgov-cv-message-builder/target/classes
-              /__w/connectedvcs-tools/connectedvcs-tools/fedgov-cv-message-builder/target/test-classes
+              /__w/connectedvcs-tools-test/connectedvcs-tools-test/fedgov-cv-message-builder/target/classes
+              /__w/connectedvcs-tools-test/connectedvcs-tools-test/fedgov-cv-message-builder/target/test-classes
 
         - name: Download Apache tomcat # Download apache tomcat for deployment
           run: |
@@ -67,14 +67,14 @@ jobs:
             rm -f apache-tomcat-9.0.34.tar.gz
         - name: Configure webapp # Configure the tomcat webapp with moving the files to tomcat dir's
           run: |
-            mkdir -p tomcat/webapps/connectedvcs-tools/ROOT/WEB-INF/classes
-            mv $GITHUB_WORKSPACE/root/WEB-INF/web.xml /__w/connectedvcs-tools/connectedvcs-tools/tomcat/webapps/connectedvcs-tools/ROOT/WEB-INF/
-            mv $GITHUB_WORKSPACE/root/index.html /__w/connectedvcs-tools/connectedvcs-tools/tomcat/webapps/connectedvcs-tools/
-            mv -n $GITHUB_WORKSPACE/root/* /__w/connectedvcs-tools/connectedvcs-tools/tomcat/webapps/connectedvcs-tools/ROOT/
-            cp /__w/connectedvcs-tools/connectedvcs-tools/fedgov-cv-TIMcreator-webapp/target/tim.war /__w/connectedvcs-tools/connectedvcs-tools/tomcat/webapps/
-            cp /__w/connectedvcs-tools/connectedvcs-tools/fedgov-cv-ISDcreator-webapp/target/isd.war /__w/connectedvcs-tools/connectedvcs-tools/tomcat/webapps/
-            cp /__w/connectedvcs-tools/connectedvcs-tools/fedgov-cv-message-validator-webapp/target/validator.war /__w/connectedvcs-tools/connectedvcs-tools/tomcat/webapps/
-            cp /__w/connectedvcs-tools/connectedvcs-tools/root.war /__w/connectedvcs-tools/connectedvcs-tools/tomcat/webapps/
+            mkdir -p tomcat/webapps/connectedvcs-tools-test/ROOT/WEB-INF/classes
+            mv $GITHUB_WORKSPACE/root/WEB-INF/web.xml /__w/connectedvcs-tools-test/connectedvcs-tools-test/tomcat/webapps/connectedvcs-tools-test/ROOT/WEB-INF/
+            mv $GITHUB_WORKSPACE/root/index.html /__w/connectedvcs-tools-test/connectedvcs-tools-test/tomcat/webapps/connectedvcs-tools-test/
+            mv -n $GITHUB_WORKSPACE/root/* /__w/connectedvcs-tools-test/connectedvcs-tools-test/tomcat/webapps/connectedvcs-tools-test/ROOT/
+            cp /__w/connectedvcs-tools-test/connectedvcs-tools-test/fedgov-cv-TIMcreator-webapp/target/tim.war /__w/connectedvcs-tools-test/connectedvcs-tools-test/tomcat/webapps/
+            cp /__w/connectedvcs-tools-test/connectedvcs-tools-test/fedgov-cv-ISDcreator-webapp/target/isd.war /__w/connectedvcs-tools-test/connectedvcs-tools-test/tomcat/webapps/
+            cp /__w/connectedvcs-tools-test/connectedvcs-tools-test/fedgov-cv-message-validator-webapp/target/validator.war /__w/connectedvcs-tools-test/connectedvcs-tools-test/tomcat/webapps/
+            cp /__w/connectedvcs-tools-test/connectedvcs-tools-test/root.war /__w/connectedvcs-tools-test/connectedvcs-tools-test/tomcat/webapps/
         - uses: actions/setup-java@v3 # This action is to setup Java
           with:
             distribution: 'temurin'
@@ -82,8 +82,8 @@ jobs:
             check-latest: true
         -  name: Configure network and set privileges # This action is to set newtork privileges on tomact server
            run: |
-            sed -i '/<\/Engine>/ i \ \ \ \ \  <Host name="connectedvcs-tools" appBase="webapps/connectedvcs-tools" unpackWARs="true" autoDeploy="true">\n      </Host>' tomcat/conf/server.xml
-            echo -e '127.0.0.1\connectedvcs-tools' | sudo tee -a /etc/hosts
+            sed -i '/<\/Engine>/ i \ \ \ \ \  <Host name="connectedvcs-tools-test" appBase="webapps/connectedvcs-tools-test" unpackWARs="true" autoDeploy="true">\n      </Host>' tomcat/conf/server.xml
+            echo -e '127.0.0.1\connectedvcs-tools-test' | sudo tee -a /etc/hosts
             sudo groupadd tomcat
             sudo useradd -g tomcat -m tomcat
             chmod g+r tomcat/conf/*
@@ -94,8 +94,8 @@ jobs:
             sudo chown -R tomcat:tomcat tomcat/work
         - name: Start Tomcat and verify deployment
           run: |
-            mv setenv.sh /__w/connectedvcs-tools/connectedvcs-tools/tomcat/bin/
-            sudo /__w/connectedvcs-tools/connectedvcs-tools/tomcat/bin/catalina.sh start
+            mv setenv.sh /__w/connectedvcs-tools-test/connectedvcs-tools-test/tomcat/bin/
+            sudo /__w/connectedvcs-tools-test/connectedvcs-tools-test/tomcat/bin/catalina.sh start
         - name: Set CLONED_REPO_PATH
           run: echo "CLONED_REPO_PATH=$GITHUB_WORKSPACE" >> $GITHUB_ENV
 
