@@ -1,4 +1,4 @@
-name: connectedvcs-tools-test-test
+name: connectedvcs-tools-test
 on:
   pull_request:
     types: [opened, synchronize, reopened]
@@ -27,15 +27,15 @@ jobs:
         - name: Install # This action is to install and build subfolders in project
           run: |
             cd $GITHUB_WORKSPACE
-            export LD_LIBRARY_PATH=/__w/connectedvcs-tools-test-test/connectedvcs-tools-test-test/fedgov-cv-lib-asn1c/lib
-            cd /__w/connectedvcs-tools-test-test/connectedvcs-tools-test-test/fedgov-cv-parent && mvn -e -X clean install -Dmaven.test.failure.ignore=true
-            cd /__w/connectedvcs-tools-test-test/connectedvcs-tools-test-test/fedgov-cv-lib-asn1c && mvn -e -X clean install -Dmaven.test.failure.ignore=true
-            cd /__w/connectedvcs-tools-test-test/connectedvcs-tools-test-test/fedgov-cv-asn1decoder && mvn -e -X clean install -Dmaven.test.failure.ignore=true
-            cd /__w/connectedvcs-tools-test-test/connectedvcs-tools-test-test/fedgov-cv-mapencoder && mvn -e -X clean install -Dmaven.test.failure.ignore=true
-            cd /__w/connectedvcs-tools-test-test/connectedvcs-tools-test-test/fedgov-cv-timencoder && mvn -e -X clean install -Dmaven.test.failure.ignore=true
-            cd /__w/connectedvcs-tools-test-test/connectedvcs-tools-test-test/fedgov-cv-rgaencoder && mvn -e -X clean install -Dmaven.test.failure.ignore=true
-            cd /__w/connectedvcs-tools-test-test/connectedvcs-tools-test-test/fedgov-cv-message-builder && mvn -e -X clean install -Dmaven.test.failure.ignore=true
-            cd /__w/connectedvcs-tools-test-test/connectedvcs-tools-test/fedgov-cv-ISDcreator-webapp && mvn -e -X clean install -Dmaven.test.failure.ignore=true
+            export LD_LIBRARY_PATH=/__w/connectedvcs-tools-test/connectedvcs-tools-test/fedgov-cv-lib-asn1c/lib
+            cd /__w/connectedvcs-tools-test/connectedvcs-tools-test/fedgov-cv-parent && mvn -e -X clean install -Dmaven.test.failure.ignore=true
+            cd /__w/connectedvcs-tools-test/connectedvcs-tools-test/fedgov-cv-lib-asn1c && mvn -e -X clean install -Dmaven.test.failure.ignore=true
+            cd /__w/connectedvcs-tools-test/connectedvcs-tools-test/fedgov-cv-asn1decoder && mvn -e -X clean install -Dmaven.test.failure.ignore=true
+            cd /__w/connectedvcs-tools-test/connectedvcs-tools-test/fedgov-cv-mapencoder && mvn -e -X clean install -Dmaven.test.failure.ignore=true
+            cd /__w/connectedvcs-tools-test/connectedvcs-tools-test/fedgov-cv-timencoder && mvn -e -X clean install -Dmaven.test.failure.ignore=true
+            cd /__w/connectedvcs-tools-test/connectedvcs-tools-test/fedgov-cv-rgaencoder && mvn -e -X clean install -Dmaven.test.failure.ignore=true
+            cd /__w/connectedvcs-tools-test/connectedvcs-tools-test/fedgov-cv-message-builder && mvn -e -X clean install -Dmaven.test.failure.ignore=true
+            cd /__w/connectedvcs-tools-test/connectedvcs-tools-test/fedgov-cv-ISDcreator-webapp && mvn -e -X clean install -Dmaven.test.failure.ignore=true
             cd /__w/connectedvcs-tools-test/connectedvcs-tools-test/fedgov-cv-message-validator-webapp && mvn -e -X clean install -Dmaven.test.failure.ignore=true
             cd /__w/connectedvcs-tools-test/connectedvcs-tools-test/fedgov-cv-TIMcreator-webapp && mvn -e -X clean install -Dmaven.test.failure.ignore=true
             cd /__w/connectedvcs-tools-test/connectedvcs-tools-test/fedgov-cv-map-services-proxy && mvn -e -X clean install -Dmaven.test.failure.ignore=true
