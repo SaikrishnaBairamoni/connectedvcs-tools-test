@@ -52,7 +52,7 @@ jobs:
             cd /__w/connectedvcs-tools-test/connectedvcs-tools-test/fedgov-cv-message-validator-webapp && mvn -e clean install -Dmaven.test.failure.ignore=true
             cd /__w/connectedvcs-tools-test/connectedvcs-tools-test/fedgov-cv-TIMcreator-webapp && mvn -e clean install -Dmaven.test.failure.ignore=true
             cd /__w/connectedvcs-tools-test/connectedvcs-tools-test/fedgov-cv-map-services-proxy && mvn -e clean install -Dmaven.test.failure.ignore=true
-            cd /__w/connectedvcs-tools/connectedvcs-tools/fedgov-cv-map-georeferencing && mvn -e clean install -Dmaven.test.failure.ignore=true
+            cd /__w/connectedvcs-tools-test/connectedvcs-tools-test/fedgov-cv-map-georeferencing && mvn -e clean install -Dmaven.test.failure.ignore=true
             jar cvf /__w/connectedvcs-tools-test/connectedvcs-tools-test/root.war -C /__w/connectedvcs-tools-test/connectedvcs-tools-test/root .
 
         - name: List Jacoco reports
